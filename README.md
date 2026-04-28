@@ -1,4 +1,4 @@
-# 🚀 Selenium Parallel Automation Framework (Java + TestNG)
+# 🚀 Selenium Parallel Automation Framework with Headless Support (Java + TestNG)
 
 A **modern, scalable, and thread-safe Selenium automation framework** built using:
 
