@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.amalw.config.ConfigManager;
 import com.amalw.enums.BrowserType;
+import com.amalw.exceptions.FrameworkException;
 
 /* DriverFactory creates and manages thread-safe WebDriver instances */
 public final class DriverFactory {
@@ -19,11 +20,14 @@ public final class DriverFactory {
 
 	// Returns the WebDriver instance associated with the current thread
 	public static WebDriver getDriver() {
+		if (tlDriver.get() == null) {
+			throw new FrameworkException("Driver not initialized!");
+		}
 		return tlDriver.get();
 	}
 
 	// Initializes WebDriver based on the specified browser type
-	public static void initDriver(String browserName) throws Exception {
+	public static void initDriver(String browserName){
 
 		// If a driver already exists in the current thread, do nothing
 		if (tlDriver.get() != null)
@@ -50,8 +54,8 @@ public final class DriverFactory {
 	}
 
 	private static void configureDriver(WebDriver driver, boolean headless) {
-		// Set window to open maximized only headless is true
-
+		
+		// Set window to open maximized only headless is false
 		if (!headless) {
 			driver.manage().window().maximize();
 		}
@@ -64,6 +68,7 @@ public final class DriverFactory {
 
 	// Quits the driver and removes it from ThreadLocal storage
 	public static void quitDriver() {
+		
 		// get current thread driver
 		WebDriver driver = tlDriver.get();
 		if (driver != null) {

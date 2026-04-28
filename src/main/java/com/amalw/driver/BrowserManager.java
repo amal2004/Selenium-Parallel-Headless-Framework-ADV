@@ -18,20 +18,28 @@ public final class BrowserManager {
 	private BrowserManager() {
 	}
 
+	// This will avoid multiple WebDriverManager calls within the switch block
+	static {
+	    WebDriverManager.chromedriver().setup();
+	    WebDriverManager.firefoxdriver().setup();
+	    WebDriverManager.edgedriver().setup();
+	}
+	
+	
 	// Create driver based on browser type using values from enums
 	public static WebDriver createDriver(BrowserType type, boolean headless) {
 
 		switch (type) {
 		case CHROME:
-			WebDriverManager.chromedriver().setup();
+			//WebDriverManager.chromedriver().setup();
 			return new ChromeDriver(chromeOptions(headless));
 
 		case FIREFOX:
-			WebDriverManager.firefoxdriver().setup();
+			//WebDriverManager.firefoxdriver().setup();
 			return new FirefoxDriver(firefoxOptions(headless));
 
 		case EDGE:
-			WebDriverManager.edgedriver().setup();
+			//WebDriverManager.edgedriver().setup();
 			return new EdgeDriver(edgeOptions(headless));
 
 		default:
@@ -67,7 +75,7 @@ public final class BrowserManager {
 		EdgeOptions options = new EdgeOptions();
 		if (headless) {
 			options.addArguments("--headless=new", "--window-size=1920,1080", "--disable-gpu", "--no-sandbox",
-					"--disable-dev-shm-usage");
+					"--disable-dev-shm-usage","--disable-notifications");
 		}
 		return options;
 	}

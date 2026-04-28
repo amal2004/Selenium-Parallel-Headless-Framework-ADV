@@ -2,12 +2,12 @@ package com.amalw.pages;
 
 import org.openqa.selenium.By;
 
+import com.amalw.config.ConfigManager;
+
 /* Provides actions to interact with registration form elements */
 
 public class RegisterPage extends BasePage {
 
-	// Nopcommerce registration page URL
-	private final String REG_URL = "http://localhost:5000/register";
 	// Locators
 	private By genderMale = By.id("gender-male");
 	private By genderFemale = By.id("gender-female");
@@ -23,7 +23,7 @@ public class RegisterPage extends BasePage {
 
 	// Navigate to registration page
 	public void open() {
-		navigateTo(REG_URL);
+		navigateTo(ConfigManager.get("base.url")+"/register");
 	}
 
 	// Select gender radio button based on input value

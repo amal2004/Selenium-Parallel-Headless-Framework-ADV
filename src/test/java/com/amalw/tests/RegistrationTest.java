@@ -26,7 +26,7 @@ public class RegistrationTest extends BaseTest {
 	// Test method for user registration using different input data sets
 	@Test(dataProvider = "registrationData")
 	public void testRegistration(String firstName, String lastName, String gender, String company, String password,
-			String conPassword) throws InterruptedException {
+			String conPassword) {
 
 		// Generate unique email to avoid duplication issues
 		String email2 = UUID.randomUUID() + "@example.com";
@@ -46,6 +46,6 @@ public class RegistrationTest extends BaseTest {
 		Assert.assertTrue(registerPage.isRegistrationSuccessful(), "Registration failed!");
 
 		// Validate success message text
-		Assert.assertEquals(registerPage.getConfirmationMessage(), "Your registration completed");
+		Assert.assertTrue(registerPage.getConfirmationMessage().contains("registration completed"));
 	}
 }

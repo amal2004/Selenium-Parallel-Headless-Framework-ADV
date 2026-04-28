@@ -11,6 +11,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import com.amalw.driver.DriverFactory;
+import com.amalw.exceptions.FrameworkException;
 
 /* ScreenshotUtil provides utility methods to capture screenshots during test execution. */
 
@@ -36,7 +37,7 @@ public class ScreenshotUtil {
 		try {
 			Files.createDirectories(destDir);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new FrameworkException("Screenshot failed");
 		}
 		// Prepare unique file name
 		String filename = screenshotName + "_" + System.currentTimeMillis() + ".png";

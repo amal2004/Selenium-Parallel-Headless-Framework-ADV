@@ -12,6 +12,8 @@ import java.time.Duration;
 
 public abstract class BasePage {
 
+	private WebDriverWait wait;
+	
 	private static final int DEFAULT_TIMEOUT = 15;
 	//private WebDriverWait wait;
 
@@ -21,7 +23,11 @@ public abstract class BasePage {
 
 	// Create WebDriverWait using default timeout
 	protected WebDriverWait getWait() {
-		return new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT)); 
+		
+		if (wait == null) {
+			wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_TIMEOUT)); 
+		}
+		return wait;
 	}
 
 	// Click an element after waiting until it is clickable

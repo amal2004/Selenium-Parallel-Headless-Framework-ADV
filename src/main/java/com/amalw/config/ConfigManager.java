@@ -36,6 +36,7 @@ public class ConfigManager {
 	        if (value == null) {
 	        	// Then check properties file 
 	            value = PROPS.getProperty(key);
+	            System.out.println("Using default for key: " + key);
 	        }
 	     // Validate value
 	        if (value == null || value.trim().isEmpty()) {
